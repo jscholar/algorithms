@@ -68,3 +68,19 @@ var makeChange = function (total) {
 
   return waysForChange;
 };
+
+
+var makeChangeDP = (total) => {
+  // dp stores total amount as index and total combinations as value
+  // There is one way to make change for 0
+  let dp = new Array(total + 1).fill(0);
+  dp[0] = 1;
+
+  for (let coin of coins) {
+    for (let i = coin; i <= total; i++) {
+      dp[i] += dp[i - coin] || 0;
+    }
+  }
+
+  return dp[total];
+}
