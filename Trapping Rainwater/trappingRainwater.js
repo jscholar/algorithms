@@ -35,3 +35,39 @@ const trap = (land) => {
 
   return trapped;
 }
+
+
+/**
+ * @param { number[] } land Integers representing an elevation map
+ * @returns { number } Integer representing grid area of trappable water
+ */
+const trapTwoPointers = (land) => {
+  let trapped = 0;
+
+
+  let left = 0;
+  let right = land.length - 1;
+
+  let leftMax = 0;
+  let rightMax = 0;
+
+  while (left < right) {
+    if (land[left] < land[right]) {
+      if (land[left] > leftMax) {
+        leftMax = land[left];
+      } else {
+        trapped += leftMax - land[left];
+      }
+      left += 1;
+    } else {
+      if (land[right] > rightMax) {
+        rightMax = land[right];
+      } else {
+        trapped += rightMax - land[right];
+      }
+      right -= 1;
+    }
+  }
+
+  return trapped;
+}
