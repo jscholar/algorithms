@@ -16,3 +16,13 @@ var nthFibonacci = function (n) {
 
   return nthFibonacci(n - 1) + nthFibonacci(n - 2);
 };
+
+var nthFibonacciDP = function (n) {
+  let dp = [0, 1];
+
+  while (dp[n] === undefined) {
+    dp[dp.length] = dp[dp.length - 1] + dp[dp.length - 2];
+  }
+
+  return dp[n];
+}
