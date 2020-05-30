@@ -167,3 +167,4 @@ def lcm(nums):
   for num in nums:
     curLCM = curLCM * num / gcd(curLCM, num);
   return curLCM;
+  
