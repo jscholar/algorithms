@@ -1,2 +1,2 @@
 # Algorithms
-> A collection of coding challenges and my solutions
+> A collection of coding challenges and my solutions.
