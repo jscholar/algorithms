@@ -6,27 +6,30 @@
  */
 var ladderLength = function(beginWord, endWord, wordList) {
     let wordSet = new Set(wordList);
-    wordSet.delete(beginWord);
-    let words = [beginWord];
-    let distance = 0;
+    
     if (wordSet.has(endWord)) {
-        while (words.length > 0) {
+        let words = new Set();
+        let otherWords = new Set();
+        words.add(beginWord);
+        otherWords.add(endWord);
+        
+        let distance = 0;
+        
+        while (words.size > 0) {
             distance += 1;
-            const n = words.length;
-            let nextWords = [];
-            for (let wordIndex = 0; wordIndex < n; wordIndex++) {
-                let word = words[wordIndex];
-                if (word === endWord) {
+            let nextWords = new Set();
+            for (let word of words.values()) {
+                if (otherWords.has(word)) {
                     return distance;
                 }
                 for (let nextWord of wordSet.values()) {
                     if (wordDistanceIsOne(word, nextWord)) {
-                        nextWords.push(nextWord);
-                        wordSet.delete(nextWord);
+                        nextWords.add(nextWord);
+                        wordSet.delete(word);
                     }
                 }
             }
-            words = nextWords;
+            [words, otherWords] = [otherWords, nextWords];
         }
     }
     
