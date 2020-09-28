@@ -1,13 +1,12 @@
 const flatten = (arr) => {
-    const flattened = [];
-    arr.forEach((element) => {
+    return arr.reduce((flattened, element) => {
         if (Array.isArray(element)) {
-            flatten(element).forEach((value) => flattened.push(value));
+            flattened = flattened.concat(flatten(element));
         } else {
             flattened.push(element);
         }
-    });
-    return flattened;
+        return flattened;
+    }, []);
 }
 
 const exampleArray = [1,2,[3,4,[5,6,7],8],9,10];
